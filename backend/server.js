@@ -30,7 +30,7 @@ router.get('/api/getItemUrl/:paymentId', async ctx => {
     const payment = await Payment.findOne({ id: ctx.params.paymentId });
     if (payment && payment.paid === true) {
         ctx.body = {
-            url: items[payment.itemsId].url
+            url: items[payment.itemId].url
         };
     } else {
         ctx.body = {

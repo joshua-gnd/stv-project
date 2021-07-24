@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:4000';
 
-const ITEMS = [
+const items = [
     {
         id: 1,
         price: ethers.utils.parseEther('100')
@@ -14,10 +14,11 @@ const ITEMS = [
     }
 ];
 
+// const listItems = items.map((item) => <li key={item.id}>{item.price}</li>);
+
 function Store({ paymentProcessor, dai }) {
     const buy = async item => {
         const response1 = await axios.get(`${API_URL}/api/getPaymentId/${item.id}`);
-        // console.log("dai: ", dai, "payment processor: ", paymentProcessor)
         const tx1 = await dai.approve(paymentProcessor.address, item.price);
         await tx1.wait();
 
@@ -37,7 +38,7 @@ function Store({ paymentProcessor, dai }) {
                 <button
                     type='button'
                     className='bg-blue-200'
-                    onClick={() => buy(ITEMS[0])}>
+                    onClick={() => buy(items[0])}>
                     Buy
                 </button>
             </li>
@@ -46,7 +47,7 @@ function Store({ paymentProcessor, dai }) {
                 <button
                     type='button'
                     className='bg-blue-200'
-                    onClick={() => buy(ITEMS[1])}>
+                    onClick={() => buy(items[1])}>
                     Buy
                 </button>
             </li>
